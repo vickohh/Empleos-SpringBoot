@@ -15,6 +15,7 @@ public class Vacante {
 	private String detalles;
 	private Categoria categoria;
 	
+	
 	public Integer getId() {
 		return id;
 	}
