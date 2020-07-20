@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>EmpleosApp | Listado de Categorias</title>
+    <!-- Bootstrap core CSS -->
+  <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link  th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link  th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  </head>
+
+  <body>
+ <header th:insert="fragments/menu:: menu-principal">
+ </header>
+
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+
+        <div class="card">
+          <h4 class="card-header"><strong>Listado de Categorias</strong></h4>              
+          <div class="card-body table-responsive" >
+            <a class="btn btn-primary" href="/categorias/create" title="Crear nueva Oferta de Trabajo" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nueva</a>            
+            <hr>
+            <h5 th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></h5>
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Nombre</th>                  
+                  <th scope="col">Descripcion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="categorias: ${categorias}">
+                  <td th:text="${categorias.id}">Supervisor de Ventas</td>                  
+                  <td th:text="${categorias.nombre}">11-01-2019</td>
+                  <td th:text="${categorias.descripcion}">Creada</td>
+                </tr>
+                               
+              </tbody>
+            </table>
+            
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer th:insert="fragments/footer1 :: footer1" class="footer">
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+   <script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+  </body>
+</html>

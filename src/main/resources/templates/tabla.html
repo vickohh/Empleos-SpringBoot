@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><title>Listado de Vacantes</title>
+</head>
+<body>
+	<img th:src="@{images/logo.png}" width="145" heigth="145">
+	<h1 class="text-primary">Lista de Vacantes</h1>
+	<table class="table table-striped table-bordered table-hover">
+	  <thead class="thead-dark">
+		  <tr>
+		    <th></th>
+		    <th>Id</th>
+		    <th>Nombre</th>
+		    <th>Fecha</th>
+		    <th>Salario</th>
+		    <th>Descripcion</th>
+		    <th>Destacada</th>
+		    <th>Detalle</th>
+		    <th>Borrar</th>
+		    
+		  </tr>
+	  </thead>
+	  <tr th:each="vacantes: ${tabla}">
+	  	<td>
+	  		<img th:src="@{images/{img} (img = ${vacantes.imagen})}" width="100" heigth="100">
+	  	</td>
+	    <td th:text="${vacantes.id}"></td>
+	    <td th:text="${vacantes.nombre}"></td>
+	    <td th:text="${vacantes.fecha}"></td>
+	    <td th:text="${vacantes.salario}"></td>
+	    <td th:text="${vacantes.descripcion}"></td>  
+	    <!-- 
+	    <td th:text="${vacantes.destacado ==1 ? 'Si' : 'No'}"></td>  
+	     -->
+	     <td >
+	     	<span th:if="${vacantes.destacado ==1}" class="badge badge-success">Si</span>
+	     	<span th:unless="${vacantes.destacado ==1}" class="badge badge-danger">No</span>
+	     </td>
+	     <td >
+	     	<a class="btn btn-success" th:href="@{/vacantes/view/{id} (id=${vacantes.id})}" >Detalle </a>
+	     </td>
+	      <td >
+	     	<a class="btn btn-danger" th:href="@{/vacantes/delete(id=${vacantes.id})}" >Borrar </a>
+	     </td>
+	    </tr>
+	  </table>
+
+</body>
+</html>
