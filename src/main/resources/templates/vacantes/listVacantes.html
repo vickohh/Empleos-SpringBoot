@@ -8,10 +8,7 @@
     <link rel="icon" href="favicon.ico">
 
     <title>EmpleosApp | Listado de Ofertas de Trabajo</title>
-    <!-- Bootstrap core CSS -->
-  <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Custom styles for this template -->
     <link  th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link  th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
@@ -19,8 +16,8 @@
   </head>
 
   <body>
- <header th:insert="fragments/menu:: menu-principal">
- </header>
+	 <header th:insert="fragments/menu:: menu-principal">
+	 </header>
 
     <main role="main">     
       <hr>
@@ -70,11 +67,7 @@
 
     <footer th:insert="fragments/footer1 :: footer1" class="footer">
     </footer>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-   <script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+   <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
   </body>
 </html>

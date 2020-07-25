@@ -34,7 +34,7 @@ public class VacantesController {
 	@Autowired
 	ICategoriasService serviceCategorias;
 	
-	@GetMapping("/index")
+	@GetMapping("/listvac")
 	public String mostrarIndex(Model model) {
 		
 	List<Vacante> vacantes = serviceVacantes.buscartodas();
@@ -85,7 +85,7 @@ public class VacantesController {
 		serviceVacantes.guardar(vacante);
 		System.out.println(vacante.toString());
 		attributes.addFlashAttribute("msg", "Registro Guardado");
-		return "redirect:/vacantes/index";		
+		return "redirect:/vacantes/listvac";		
 	}
 	
 	@InitBinder
