@@ -5,9 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.vck.empleos.model.Vacante;
 import com.vck.empleos.service.IVacantesService;
@@ -63,5 +66,14 @@ public class HomeController {
 		return "home";
 		
 	}
-	
+	@SuppressWarnings("deprecation")
+	@Configuration
+	public class StaticResourceConfiguration extends WebMvcConfigurerAdapter {      
+	    @Override
+	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	        registry.addResourceHandler("/pngFiles/**")
+	        .addResourceLocations("file:ext-resources/")
+	        .setCachePeriod(0);
+	    }
+}
 }
