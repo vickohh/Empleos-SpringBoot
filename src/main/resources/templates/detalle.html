@@ -32,7 +32,7 @@
             <div class="card">
               <h4 class="card-header">Aplicar para <strong th:text="${vacantes.nombre}">Ingeniero Civil</strong></h4>              
               <div class="card-body">
-                <h5 class="card-title"><strong>Categoría: </strong> <span>Sistemas</span></h5>
+                <h5 class="card-title"><strong>Categoría: </strong> <span th:text="${vacantes.categoria.nombre}" >Sistemas</span></h5>
                 <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${vacantes.fecha}" >2019-01-01 </span></h6>                
                 <h6 class="card-title"><strong>Salario Ofrecido: </strong><span th:text="${vacantes.salario}">$9000</span></h6>
                 <p class="card-text" th:text="${vacantes.descripcion}">La descripción corta de la oferta de trabajo</p>
@@ -40,7 +40,7 @@
                 <div class="card bg-light mb-3" >
                   <div class="card-body">
                     <h5 class="card-title">Detalles de la oferta de trabajo</h5>
-                    <p class="card-text" th:text="${vacantes.descripcion}" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                    <p class="card-text" th:utext="${vacantes.detalles}" ></p>
                   </div>
                 </div>   
                 <a class="btn btn-primary" href="#" role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Aplicar</a>                            

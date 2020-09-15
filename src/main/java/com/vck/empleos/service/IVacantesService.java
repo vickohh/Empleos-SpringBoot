@@ -8,5 +8,6 @@ public interface IVacantesService {
 	List<Vacante> buscartodas();
 	Vacante buscaPorId(Integer idVacante);
 	void guardar(Vacante vacante);
+	List<Vacante> buscarDestacadas();
 	
 }

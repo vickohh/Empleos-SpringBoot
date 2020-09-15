@@ -20,11 +20,11 @@ public class Vacante {
 	
 	private String nombre;
 	private String descripcion;
-	private Date fecha;
-	private double salario;
-	private Integer destacado;
-	private String imagen = "no-image.png";
 	private String estatus;
+	private Date fecha;
+	private Integer destacado;
+	private double salario;
+	private String imagen = "no-image.png";
 	private String detalles;
 	
 	//@Transient//omite este parametro en la base de datos

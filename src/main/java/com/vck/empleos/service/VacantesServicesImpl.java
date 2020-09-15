@@ -89,4 +89,10 @@ public class VacantesServicesImpl implements IVacantesService {
 		
 	}
 
+	@Override
+	public List<Vacante> buscarDestacadas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

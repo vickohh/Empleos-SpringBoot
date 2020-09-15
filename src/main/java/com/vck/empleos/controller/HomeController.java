@@ -5,25 +5,38 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.vck.empleos.model.Categoria;
 import com.vck.empleos.model.Vacante;
+import com.vck.empleos.service.ICategoriasService;
 import com.vck.empleos.service.IVacantesService;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
+	@Qualifier("vacanteServiceJPA")
 	private IVacantesService serviceVacantes;
+	
+	@Autowired
+	@Qualifier("categoriasServiceJPA")
+	ICategoriasService serviceCategorias;
 	
 	
 	@GetMapping("/tabla")
 	public String showTable(Model model) {
+		
+		List<Categoria> categorias = serviceCategorias.buscarTodas();
+		model.addAttribute("categorias", categorias);
+		
 		List<Vacante> lista = serviceVacantes.buscartodas();
 		model.addAttribute("tabla", lista);
 		
@@ -60,19 +73,26 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String showHome(Model model ) {
-		List<Vacante> lista = serviceVacantes.buscartodas();
-		model.addAttribute("vacantes", lista);
+		
+	//toma los valores del metodo con la anotacion @ModelAttribute
+		return "home";		
+	}
 	
-		return "home";
+	@ModelAttribute/// agregar atributos globales para todos los metodos
+	public void setGenericos(Model model) {
+		model.addAttribute("vacantes", serviceVacantes.buscarDestacadas());	
 		
 	}
+	
+	
+	
 	@SuppressWarnings("deprecation")
 	@Configuration
 	public class StaticResourceConfiguration extends WebMvcConfigurerAdapter {      
 	    @Override
 	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	        registry.addResourceHandler("/pngFiles/**")
-	        .addResourceLocations("file:ext-resources/")
+	        .addResourceLocations("file:/ext-resources/")
 	        .setCachePeriod(0);
 	    }
 }

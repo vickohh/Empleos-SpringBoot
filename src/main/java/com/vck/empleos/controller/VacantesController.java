@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -35,9 +36,11 @@ public class VacantesController {
 	private String ruta;
 	
 	@Autowired
+	@Qualifier("vacanteServiceJPA")
 	private IVacantesService serviceVacantes;
 	
 	@Autowired
+	@Qualifier("categoriasServiceJPA")
 	ICategoriasService serviceCategorias;
 	
 	@GetMapping("/listvac")
@@ -73,7 +76,9 @@ public class VacantesController {
 		
 		
 		List<Categoria> categorias = serviceCategorias.buscarTodas();
-		model.addAttribute("categorias", categorias);
+		 model.addAttribute("categorias", categorias);
+		 boolean myBooleanVariable = false;
+		 model.addAttribute("myBooleanVariable", myBooleanVariable);
 		return "vacantes/formVacante";
 	}
 	
