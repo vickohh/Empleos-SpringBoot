@@ -34,9 +34,7 @@ public class HomeController {
 	@GetMapping("/tabla")
 	public String showTable(Model model) {
 		
-		List<Categoria> categorias = serviceCategorias.buscarTodas();
-		model.addAttribute("categorias", categorias);
-		
+				
 		List<Vacante> lista = serviceVacantes.buscartodas();
 		model.addAttribute("tabla", lista);
 		
@@ -54,8 +52,7 @@ public class HomeController {
 		
 		model.addAttribute("vacante", vacante);
 		
-		return"detalle";
-		
+		return"detalle";		
 	}
 	
 		
@@ -73,7 +70,8 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String showHome(Model model ) {
-		
+		List<Categoria> categorias = serviceCategorias.buscarTodas();
+		model.addAttribute("categorias", categorias);
 	//toma los valores del metodo con la anotacion @ModelAttribute
 		return "home";		
 	}

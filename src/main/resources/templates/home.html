@@ -27,8 +27,8 @@
           <form class="form-inline">
             <input type="text" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
             <select class="custom-select custom-select mb-3" name="categoria">
-            	  <option selected>Seleccione una categoría</option>
-             	  <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}">     
+				<option selected>Seleccione una categoría</option>
+				<option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"/>    
             </select>&nbsp;
             <button type="submit" class="btn btn-primary mb-3">Buscar</button>
           </form>
@@ -45,7 +45,7 @@
           </div>
           <div class="col-md-9">
             <h2 th:text="${vacante.nombre}" >Arquitecto</h2>
-            <h6 class="card-title"><strong>Categoría: </strong> <span>Sistemas</span></h6>
+            <h6 class="card-title"><strong>Categoría: </strong> <span th:text="${vacante.categoria.nombre}" >Sistemas</span></h6>
             <h6 class="card-title" ><strong>Publicado: </strong> <span th:text="${vacante.fecha}" >2019-01-01 </span></h6>                
             <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
             <p><a class="btn btn-secondary" th:href="@{/vacantes/view/{id} (id=${vacante.id})}" role="button">Detalles &raquo;</a></p>            
