@@ -33,7 +33,6 @@ public class VacanteServiceJPA implements IVacantesService {
 		return null;			
 	}
 
-	@Override
 	public void guardar(Vacante vacante) {
 		
 		vacantesRepo.save(vacante);
@@ -44,6 +43,14 @@ public class VacanteServiceJPA implements IVacantesService {
 	public List<Vacante> buscarDestacadas() {
 		
 		return vacantesRepo.findByDestacadoAndEstatusOrderByIdDesc(1, "Aprobada");
+	}
+
+	@Override
+	public void eliminar(Integer idVacante) {
+		
+		vacantesRepo.deleteById(idVacante);
+		
+		
 	}
 
 }

@@ -43,43 +43,40 @@ public class VacantesController {
 	@Qualifier("categoriasServiceJPA")
 	ICategoriasService serviceCategorias;
 	
-	@GetMapping("/listvac")
-	public String mostrarIndex(Model model) {
-		
-	List<Vacante> vacantes = serviceVacantes.buscartodas();
-	model.addAttribute("vacantes", vacantes);
 	
-	return "vacantes/listVacantes";	
+	
+	@GetMapping("/listvac")
+	public String mostrarIndex(Model model) {		
+		List<Vacante> vacantes = serviceVacantes.buscartodas();
+		model.addAttribute("vacantes", vacantes);		
+		return "vacantes/listVacantes";	
 	}
 	
 	
-	@GetMapping("/view/{id}")
-	public String verDetalles(@PathVariable("id") int idVacante,Model model) {
-		
+	@GetMapping("/view/{id}")														//BUSCAR POR ID
+	public String verDetalles(@PathVariable("id") int idVacante,Model model) {	
 	    Vacante vacante = serviceVacantes.buscaPorId(idVacante);
-		model.addAttribute("vacantes", vacante);
-		
+		model.addAttribute("vacantes", vacante);	
 		//buscara los detalles de la vacante en la BD
 		return "detalle";
 	}
 	
-	@GetMapping("/delete") // se envia el id por la URI
-	public String eliminar(@RequestParam("id") int idVacante,Model model) {
-		System.out.println("Borrando Vacante con id: "+ idVacante);
-		model.addAttribute("id", idVacante);
-		return "mensaje";
 		
+	@GetMapping("/delete/{id}") // se envia el id por la URI 						//ELIMINAR
+	public String eliminar(@PathVariable("id") int idVacante,Model model,RedirectAttributes attributes) {	
+		 serviceVacantes.eliminar(idVacante);
+		 attributes.addFlashAttribute("msg", "Registro Eliminado");
+		 return "redirect:/vacantes/listvac";		
 	}
 	
+		
 	@GetMapping("/create")
 	public String crear(Vacante vacante, Model model) {
-		
-		
-		List<Categoria> categorias = serviceCategorias.buscarTodas();
+		 List<Categoria> categorias = serviceCategorias.buscarTodas();
 		 model.addAttribute("categorias", categorias);
 		 boolean myBooleanVariable = false;
 		 model.addAttribute("myBooleanVariable", myBooleanVariable);
-		return "vacantes/formVacante";
+		 return "vacantes/formVacante";
 	}
 	
 	@PostMapping("/save") //***************FORMULARIO EN /CREATE
@@ -109,6 +106,7 @@ public class VacantesController {
 		attributes.addFlashAttribute("msg", "Registro Guardado");
 		return "redirect:/vacantes/listvac";		
 	}
+	
 	
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
