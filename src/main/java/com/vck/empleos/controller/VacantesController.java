@@ -15,6 +15,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +62,9 @@ public class VacantesController {
 		return "detalle";
 	}
 	
+	public void setGenericos() {
 		
+	}
 	@GetMapping("/delete/{id}") // se envia el id por la URI 						//ELIMINAR
 	public String eliminar(@PathVariable("id") int idVacante,Model model,RedirectAttributes attributes) {	
 		 serviceVacantes.eliminar(idVacante);
@@ -70,16 +73,14 @@ public class VacantesController {
 	}
 	
 		
-	@GetMapping("/create")
+	@GetMapping("/create")                                                          //CREAR
 	public String crear(Vacante vacante, Model model) {
-		 List<Categoria> categorias = serviceCategorias.buscarTodas();
-		 model.addAttribute("categorias", categorias);
 		 boolean myBooleanVariable = false;
 		 model.addAttribute("myBooleanVariable", myBooleanVariable);
 		 return "vacantes/formVacante";
 	}
 	
-	@PostMapping("/save") //***************FORMULARIO EN /CREATE
+	@PostMapping("/save")                                                            //FORMULARIO EN /CREATE
 	public String guardar(Vacante vacante,BindingResult result,Categoria categoria,RedirectAttributes attributes, 
 						@RequestParam("archivoImagen") MultipartFile multiPart,Model model)  {
 		
@@ -101,12 +102,19 @@ public class VacantesController {
 			System.out.println(nombreImagen);
 			}
 		}
-		serviceVacantes.guardar(vacante);
+		serviceVacantes.guardar(vacante);                                            //GUARDAR
 		System.out.println(vacante.toString());
 		attributes.addFlashAttribute("msg", "Registro Guardado");
 		return "redirect:/vacantes/listvac";		
 	}
 	
+	@GetMapping("/edit/{id}")                                                        //EDITAR
+	public String editar(@PathVariable("id") int idVacante,Model model) {
+		Vacante vacante = serviceVacantes.buscaPorId(idVacante);
+		model.addAttribute("vacante", vacante);
+		return "vacantes/formVacante";
+		
+	}
 	
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
@@ -115,7 +123,11 @@ public class VacantesController {
 	}
 	
 	
-
+	@ModelAttribute/// agregar atributos globales para todos los metodos
+	public void setGenericos(Model model) {
+		model.addAttribute("categorias", serviceCategorias.buscarTodas());
+		
+	}
 	
 	
 	
