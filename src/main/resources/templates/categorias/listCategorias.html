@@ -47,8 +47,8 @@
                   <td th:text="${categorias.nombre}">11-01-2019 ESTO NO SE LEE PORQUE SE USA EL TH:EACH</td>
                   <td th:text="${categorias.descripcion}">Creada ESTO NO SE LEE PORQUE SE USA EL TH:EACH</td>
                   <td>
-                    <a href="#" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                    <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    <a th:href="@{/categorias/edit/{id}   (id=${categorias.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a th:href="@{/categorias/delete/{id}   (id=${categorias.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
                   </td>
                 </tr>
                                

@@ -30,15 +30,11 @@ public class HomeController {
 	
 	@GetMapping("/tabla")
 	public String showTable(Model model) {
-		
-				
 		List<Vacante> lista = serviceVacantes.buscartodas();
 		model.addAttribute("tabla", lista);
-		
 		return "tabla";
 	}
-	
-	
+		
 	@GetMapping("/detalle")
 	public String showDetails(Model model) {
 		Vacante vacante = new Vacante();

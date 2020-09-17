@@ -39,6 +39,8 @@
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="nombre">Nombre</label>
+                    <input type="hidden" th:field="*{id}"> 
+                    <input type="hidden" th:field="*{imagen}"> 
                     <input type="text" class="form-control" id="nombre" th:field="*{nombre}" name="nombre" placeholder="Titulo de la oferta de trabajo" required="required"/>
                   </div>
                 </div>

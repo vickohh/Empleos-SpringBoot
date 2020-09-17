@@ -18,8 +18,7 @@ public class CategoriasServiceJPA implements ICategoriasService {
 
 	@Override
 	public void guardar(Categoria categoria) {
-		categoriasRepo.save(categoria);
-		
+		categoriasRepo.save(categoria);		
 	}
 
 	@Override
@@ -29,13 +28,17 @@ public class CategoriasServiceJPA implements ICategoriasService {
 	}
 
 	@Override
-	public Categoria buscarPorId(Integer idCategoria) {
-		
+	public Categoria buscarPorId(Integer idCategoria) {		
 		Optional<Categoria> optional = categoriasRepo.findById(idCategoria);
 		if(optional.isPresent()) {
 			return optional.get();
 		}
 		return null;			
+	}
+
+	@Override
+	public void eliminar(Integer idCategoria) {
+		categoriasRepo.deleteById(idCategoria);		
 	}
 
 }

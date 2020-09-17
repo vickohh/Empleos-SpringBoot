@@ -19,13 +19,11 @@ public class VacanteServiceJPA implements IVacantesService {
 
 	@Override
 	public List<Vacante> buscartodas() {
-		return vacantesRepo.findAll();
-		
+		return vacantesRepo.findAll();		
 	}
 
 	@Override
-	public Vacante buscaPorId(Integer idVacante) {
-		
+	public Vacante buscaPorId(Integer idVacante) {		
 		Optional<Vacante> optional = vacantesRepo.findById(idVacante);
 		if(optional.isPresent()) {
 			return optional.get();
@@ -33,24 +31,18 @@ public class VacanteServiceJPA implements IVacantesService {
 		return null;			
 	}
 
-	public void guardar(Vacante vacante) {
-		
-		vacantesRepo.save(vacante);
-		
+	public void guardar(Vacante vacante) {		
+		vacantesRepo.save(vacante);		
 	}
 
 	@Override
-	public List<Vacante> buscarDestacadas() {
-		
+	public List<Vacante> buscarDestacadas() {		
 		return vacantesRepo.findByDestacadoAndEstatusOrderByIdDesc(1, "Aprobada");
 	}
 
 	@Override
 	public void eliminar(Integer idVacante) {
-		
-		vacantesRepo.deleteById(idVacante);
-		
-		
+		vacantesRepo.deleteById(idVacante);				
 	}
 
 }

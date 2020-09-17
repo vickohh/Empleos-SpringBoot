@@ -46,7 +46,7 @@ public class VacantesController {
 	
 	
 	
-	@GetMapping("/listvac")
+	@GetMapping("/listvac")														  //LISTADO DE VACANTES
 	public String mostrarIndex(Model model) {		
 		List<Vacante> vacantes = serviceVacantes.buscartodas();
 		model.addAttribute("vacantes", vacantes);		
@@ -65,13 +65,6 @@ public class VacantesController {
 	public void setGenericos() {
 		
 	}
-	@GetMapping("/delete/{id}") // se envia el id por la URI 						//ELIMINAR
-	public String eliminar(@PathVariable("id") int idVacante,Model model,RedirectAttributes attributes) {	
-		 serviceVacantes.eliminar(idVacante);
-		 attributes.addFlashAttribute("msg", "Registro Eliminado");
-		 return "redirect:/vacantes/listvac";		
-	}
-	
 		
 	@GetMapping("/create")                                                          //CREAR
 	public String crear(Vacante vacante, Model model) {
@@ -80,12 +73,13 @@ public class VacantesController {
 		 return "vacantes/formVacante";
 	}
 	
-	@PostMapping("/save")                                                            //FORMULARIO EN /CREATE
+	@PostMapping("/save")                                                           //FORMULARIO EN /CREATE
 	public String guardar(Vacante vacante,BindingResult result,Categoria categoria,RedirectAttributes attributes, 
 						@RequestParam("archivoImagen") MultipartFile multiPart,Model model)  {
 		
 		List<Categoria> categorias = serviceCategorias.buscarTodas();
 		model.addAttribute("categorias", categorias);
+		
 		if(result.hasErrors()) {			
 			for(ObjectError error: result.getAllErrors()) {
 				System.out.println("El error es: " + error.getDefaultMessage());
@@ -93,7 +87,6 @@ public class VacantesController {
 			return "vacantes/formVacante";
 		}
 		if (!multiPart.isEmpty()) {
-			//String ruta = "/empleos/img-vacantes/"; // Linux/MAC
 			//String ruta = ruta; // Windows
 			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
 			if (nombreImagen != null){ // La imagen si se subio
@@ -112,9 +105,16 @@ public class VacantesController {
 	public String editar(@PathVariable("id") int idVacante,Model model) {
 		Vacante vacante = serviceVacantes.buscaPorId(idVacante);
 		model.addAttribute("vacante", vacante);
-		return "vacantes/formVacante";
-		
+		return "vacantes/formVacante";		
 	}
+	
+	@GetMapping("/delete/{id}") // se envia el id por la URI 						 //ELIMINAR
+	public String eliminar(@PathVariable("id") int idVacante,Model model,RedirectAttributes attributes) {	
+		 serviceVacantes.eliminar(idVacante);
+		 attributes.addFlashAttribute("msg", "Registro Eliminado");
+		 return "redirect:/vacantes/listvac";		
+	}
+	
 	
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
