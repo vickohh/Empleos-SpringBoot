@@ -23,14 +23,12 @@ public class UsuarioService implements IUsuariosService {
 
 	@Override
 	public void eliminar(Integer idUsuario) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
-	@Override
+	@Override																//BUSCAR TODODS
 	public List<Usuario> buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return usuarioRepo.findAll();
 	}
 	
 	public Usuario findByEmail(Usuario usuario) {

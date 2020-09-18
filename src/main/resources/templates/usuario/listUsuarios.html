@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" >
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,13 +7,15 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>EmpleosApp | Creación de Ofertas de Trabajo</title>
+    <title>EmpleosApp | Listado de Categorias</title>
     <!-- Bootstrap core CSS -->
+  <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link  th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link  th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
   </head>
 
   <body>
@@ -40,40 +42,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Iván Eliseo Tinajero Díaz</td>
-                  <td>itinajero</td>                  
-                  <td>ivanetinajero@gmail.com</td>
-                  <td>Activo</td>
+                <tr th:each="usuario: ${usuarios}">
+                  <td th:text="${usuario.nombre}">Iván Eliseo Tinajero Díaz</td>
+                  <td th:text="${usuario.username}">itinajero</td>                  
+                  <td th:text="${usuario.email}">ivanetinajero@gmail.com</td>
+                  <td th:text="${usuario.estatus}">Activo</td>
                   <td>
                     <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
                     <a href="#" onclick="return confirm('¿Quiere bloquear el acceso al usuario?')" class="btn btn-success btn-sm" role="button" title="Bloquear el acceso al sistema para este usuario."><i class="fas fa-lock" aria-hidden="true"></i></a>	
                     <a href="#" onclick="return confirm('¿Desea desbloquear el usuario?')" class="btn btn-success btn-sm" role="button" title="Permitir el acceso al sistema a este usuario."><i class="fas fa-unlock" aria-hidden="true"></i></a>
                   </td>
-                </tr>
-                <tr>
-                  <td>Daniel Saldivar</td>
-                  <td>daniel</td>                  
-                  <td>daniel@domain.com</td>
-                  <td>Bloqueado</td>
-                  <td>
-                    <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
-                    <a href="#" onclick="return confirm('¿Quiere bloquear el acceso al usuario?')" class="btn btn-success btn-sm" role="button" title="Bloquear el acceso al sistema para este usuario."><i class="fas fa-lock" aria-hidden="true"></i></a>	
-                    <a href="#" onclick="return confirm('¿Desea desbloquear el usuario?')" class="btn btn-success btn-sm" role="button" title="Permitir el acceso al sistema a este usuario."><i class="fas fa-unlock" aria-hidden="true"></i></a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Marisol Ramos Ríos</td>
-                  <td>marisol</td>                  
-                  <td>marisol@test.com</td>
-                  <td>Activo</td>
-                  <td>                    
-                    <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
-                    <a href="#" onclick="return confirm('¿Quiere bloquear el acceso al usuario?')" class="btn btn-success btn-sm" role="button" title="Bloquear el acceso al sistema para este usuario."><i class="fas fa-lock" aria-hidden="true"></i></a>	
-                    <a href="#" onclick="return confirm('¿Desea desbloquear el usuario?')" class="btn btn-success btn-sm" role="button" title="Permitir el acceso al sistema a este usuario."><i class="fas fa-unlock" aria-hidden="true"></i></a>
-                  </td>
-                </tr>
-                                               
+                </tr>                         
               </tbody>
             </table>
             

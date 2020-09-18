@@ -22,7 +22,8 @@ public class UsuarioController {
 	private IUsuariosService serviceUsuario;
 	
 	@GetMapping("/listUsuarios")														  //LISTADO DE VACANTES
-	public String mostrarIndex(Model model) {		
+	public String mostrarIndex(Model model) {
+		model.addAttribute("usuarios", serviceUsuario.buscarTodos());
 		return "usuario/listUsuarios";	
 	}
 	
