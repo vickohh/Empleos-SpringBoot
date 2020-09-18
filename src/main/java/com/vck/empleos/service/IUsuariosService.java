@@ -23,6 +23,7 @@ public interface IUsuariosService {
 	List<Usuario> buscarTodos();
 	
 	Usuario findByEmail(Usuario usuario);
+	Usuario findByUsername(Usuario usuario);
 }
 
 // Agregar al archivo menu.html el link para acceder al listado de Usuarios y configurar el link del botón Registrarse

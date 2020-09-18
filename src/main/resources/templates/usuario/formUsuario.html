@@ -17,17 +17,15 @@
 
   <body>
 
-
      <header th:insert="fragments/menu:: menu-principal">
-		
-    </header>
-
+	</header>
 
     <main role="main">     
       <hr>
       <div class="container"> 
 
         <div class="card">
+         <h5 th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></h5>
           <h4 class="card-header"><strong>Formulario de registro</strong></h4>              
           <div class="card-body">
              <form th:action="@{/usuario/signup}" method="post"  enctype="multipart/form-data">             

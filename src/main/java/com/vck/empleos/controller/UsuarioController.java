@@ -21,6 +21,11 @@ public class UsuarioController {
 	@Autowired
 	private IUsuariosService serviceUsuario;
 	
+	@GetMapping("/listUsuarios")														  //LISTADO DE VACANTES
+	public String mostrarIndex(Model model) {		
+		return "usuario/listUsuarios";	
+	}
+	
 	@GetMapping("/signup")
 	public String registrarse(Model model ) {		
 		return "usuario/formUsuario";		
@@ -32,21 +37,29 @@ public class UsuarioController {
 		usuario.setEstatus(1);
 		usuario.setFechaRegistro(new Date());
 		
-		//validar correro con optimal
-	if(serviceUsuario.findByEmail(usuario) == null) {
-		//validar nombre con optimal
-		serviceUsuario.guardar(usuario);
+		//test
+		//System.out.println(serviceUsuario.findByEmail(usuario).getEmail());
+		//System.out.println(serviceUsuario.findByNombre(usuario).getNombre());
+		
+		
+	if(serviceUsuario.findByEmail(usuario) == null  && serviceUsuario.findByUsername(usuario) == null) {
 		System.out.println("USUARIO NUEVO AGREGADO");
-		//attributes.addFlashAttribute("msg", "Usuario Guardado");
-		 return "usuario/listUsuarios";
-	  }else {	
-	   System.out.println("USUARIO CON CORREOR YA AGREGADO");		  
+		serviceUsuario.guardar(usuario);
+		attributes.addFlashAttribute("msg","Usuario agregado");
+		//System.out.println("USUARIO NUEVO AGREGADO");
+		return "redirect:/usuario/listUsuarios";
+	  }else {
+		  if(serviceUsuario.findByEmail(usuario) != null) 
+		  {
+			  attributes.addFlashAttribute("msg", "Correo en uso");
+			  System.out.println("USUARIO CON EMAIL YA AGREGADO");		
+		  }
+		  if(serviceUsuario.findByUsername(usuario) != null) 
+		  {
+			  attributes.addFlashAttribute("msg", "Nombre de usuario en uso");
+			  System.out.println("USUARIO CON NOMBRE YA AGREGADO");	
+		  }
 	  }
-
-		//attributes.addFlashAttribute("msg", "Usuario Guardado");
-	      return "usuario/formUsuario";
-	
-	}
-	
-	
+	 return "redirect:/usuario/signup";	      	 	
+	}	
 }
