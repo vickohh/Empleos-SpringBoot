@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,7 +22,7 @@ public class UsuarioController {
 	@Autowired
 	private IUsuariosService serviceUsuario;
 	
-	@GetMapping("/listUsuarios")														  //LISTADO DE VACANTES
+	@GetMapping("/listUsuarios")														  //LISTADO DE USUARIOS
 	public String mostrarIndex(Model model) {
 		model.addAttribute("usuarios", serviceUsuario.buscarTodos());
 		return "usuario/listUsuarios";	
@@ -33,16 +34,10 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/signup")
-	public String guardarResgistro(Usuario usuario,Model model,RedirectAttributes attributes) {
-		
+	public String guardarResgistro(Usuario usuario,Model model,RedirectAttributes attributes) {		
 		usuario.setEstatus(1);
 		usuario.setFechaRegistro(new Date());
-		
-		//test
-		//System.out.println(serviceUsuario.findByEmail(usuario).getEmail());
-		//System.out.println(serviceUsuario.findByNombre(usuario).getNombre());
-		
-		
+
 	if(serviceUsuario.findByEmail(usuario) == null  && serviceUsuario.findByUsername(usuario) == null) {
 		System.out.println("USUARIO NUEVO AGREGADO");
 		serviceUsuario.guardar(usuario);
@@ -62,5 +57,12 @@ public class UsuarioController {
 		  }
 	  }
 	 return "redirect:/usuario/signup";	      	 	
-	}	
+	}
+	
+	@GetMapping("/delete/{id}")														  //ELIMINAR VACANTE
+	public String eliminar(@PathVariable("id") int idUsuario,Model model,RedirectAttributes attributes) {
+		serviceUsuario.eliminar(idUsuario);
+		attributes.addFlashAttribute("msg", "Registro Eliminado");
+		return  "redirect:/usuario/listUsuarios";	
+	}
 }

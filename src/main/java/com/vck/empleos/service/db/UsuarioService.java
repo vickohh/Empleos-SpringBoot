@@ -23,7 +23,7 @@ public class UsuarioService implements IUsuariosService {
 
 	@Override
 	public void eliminar(Integer idUsuario) {
-		// TODO Auto-generated method stub		
+		usuarioRepo.deleteById(idUsuario);
 	}
 
 	@Override																//BUSCAR TODODS
