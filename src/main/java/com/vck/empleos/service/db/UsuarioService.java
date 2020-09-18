@@ -15,10 +15,8 @@ public class UsuarioService implements IUsuariosService {
 	
 	
 	
-	@Override
-	public void guardar(Usuario usuario) {
-		// TODO Auto-generated method stub
-		
+	public void guardar(Usuario usuario) {		
+		usuarioRepo.save(usuario);	
 	}
 
 	@Override

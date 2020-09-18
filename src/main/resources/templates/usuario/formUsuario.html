@@ -30,7 +30,7 @@
         <div class="card">
           <h4 class="card-header"><strong>Formulario de registro</strong></h4>              
           <div class="card-body">
-            <form>              
+             <form th:action="@{/usuario/signup}" method="post"  enctype="multipart/form-data">             
               <div class="row">
                 <div class="col-md-3"> 
                   <div class="form-group">
@@ -66,13 +66,7 @@
 
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p>
-          &copy; 2019 EmpleosApp, Inc. | WebApp Desarrollada con Spring Boot 2.1.2 | Autor: Iv&aacute;n E. Tinajero D&iacute;az | &middot; <a href="#">Privacy</a>
-          &middot; <a href="#">Terms</a>
-        </p>
-      </div>
+ <footer th:insert="fragments/footer1 :: footer1" class="footer">
     </footer>
 
     <!-- Bootstrap core JavaScript
