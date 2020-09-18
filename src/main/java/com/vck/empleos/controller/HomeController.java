@@ -1,7 +1,6 @@
 package com.vck.empleos.controller;
 
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,24 +47,11 @@ public class HomeController {
 		return"detalle";		
 	}
 	
-		
-	@GetMapping("/listado")
-	public String showList(Model model) {
-		List<String> lista = new LinkedList<String>();
-		lista.add("Ingeniero de Sistemas");
-		lista.add("Aux de Contabilidad");
-		lista.add("Enfermero");	
-		
-		model.addAttribute("lista",lista);
-		return "listado";
-		
-	}
 	
 	@GetMapping("/")
 	public String showHome(Model model ) {
 		List<Categoria> categorias = serviceCategorias.buscarTodas();
 		model.addAttribute("categorias", categorias);
-	//toma los valores del metodo con la anotacion @ModelAttribute
 		return "home";		
 	}
 	
@@ -74,6 +60,7 @@ public class HomeController {
 		model.addAttribute("vacantes", serviceVacantes.buscarDestacadas());	
 		
 	}
+	
 
 }
 
