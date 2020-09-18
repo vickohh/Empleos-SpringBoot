@@ -46,7 +46,10 @@
                   <td th:text="${usuario.nombre}">Iván Eliseo Tinajero Díaz</td>
                   <td th:text="${usuario.username}">itinajero</td>                  
                   <td th:text="${usuario.email}">ivanetinajero@gmail.com</td>
-                  <td th:text="${usuario.estatus}">Activo</td>
+                  <td>
+                  	<span th:if="${usuario.estatus ==1}" class="badge badge-success">Activo</span>
+	     		  	<span th:unless="${usuario.estatus ==1}" class="badge badge-danger">No activo</span>
+                  </td>
                   <td>
                     <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
                     <a href="#" onclick="return confirm('¿Quiere bloquear el acceso al usuario?')" class="btn btn-success btn-sm" role="button" title="Bloquear el acceso al sistema para este usuario."><i class="fas fa-lock" aria-hidden="true"></i></a>	
