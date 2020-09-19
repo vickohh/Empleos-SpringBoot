@@ -73,9 +73,9 @@ public class VacantesController {
 		 return "vacantes/formVacante";
 	}
 	
-	@PostMapping("/save")                                                           //FORMULARIO EN /CREATE
-	public String guardar(Vacante vacante,BindingResult result,Categoria categoria,RedirectAttributes attributes, 
-						@RequestParam("archivoImagen") MultipartFile multiPart,Model model)  {
+	@PostMapping("/save")                                                            //FORMULARIO EN CREATE
+	public String guardar(Vacante vacante, BindingResult result, Categoria categoria, RedirectAttributes attributes, 
+						@RequestParam("archivoImagen") MultipartFile multiPart, Model model)  {
 		
 		List<Categoria> categorias = serviceCategorias.buscarTodas();
 		model.addAttribute("categorias", categorias);
@@ -127,8 +127,5 @@ public class VacantesController {
 	public void setGenericos(Model model) {
 		model.addAttribute("categorias", serviceCategorias.buscarTodas());
 		
-	}
-	
-	
-	
+	}	
 }

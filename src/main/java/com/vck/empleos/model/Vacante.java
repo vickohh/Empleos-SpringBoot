@@ -23,7 +23,7 @@ public class Vacante {
 	private String estatus;
 	private Date fecha;
 	private Integer destacado;
-	private double salario;
+	private Double salario;
 	private String imagen = "no-image.png";
 	private String detalles;
 	
@@ -69,7 +69,7 @@ public class Vacante {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public double getSalario() {
+	public Double getSalario() {
 		return salario;
 	}
 	public void setSalario(double salario) {
@@ -96,6 +96,11 @@ public class Vacante {
 	}
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+	
+	public void reset() {
+		this.imagen =null;
+		
 	}
 	@Override
 	public String toString() {
