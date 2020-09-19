@@ -42,19 +42,37 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="categorias: ${categorias}">
-                  <td th:text="${categorias.id}">Supervisor de Ventas  ESTO NO SE LEE PORQUE SE USA EL TH:EACH</td>                  
-                  <td th:text="${categorias.nombre}">11-01-2019 ESTO NO SE LEE PORQUE SE USA EL TH:EACH</td>
-                  <td th:text="${categorias.descripcion}">Creada ESTO NO SE LEE PORQUE SE USA EL TH:EACH</td>
+                <tr th:each="categoriaspag: ${categorias}">
+                  <td th:text="${categoriaspag.id}">Supervisor de Ventas  ESTO NO SE LEE PORQUE SE USA EL TH:EACH</td>                  
+                  <td th:text="${categoriaspag.nombre}">11-01-2019 ESTO NO SE LEE PORQUE SE USA EL TH:EACH</td>
+                  <td th:text="${categoriaspag.descripcion}">Creada ESTO NO SE LEE PORQUE SE USA EL TH:EACH</td>
                   <td>
-                    <a th:href="@{/categorias/edit/{id}   (id=${categorias.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-                    <a th:href="@{/categorias/delete/{id}   (id=${categorias.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    <a th:href="@{/categorias/edit/{id}   (id=${categoriaspag.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a th:href="@{/categorias/delete/{id}   (id=${categoriaspag.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
                   </td>
                 </tr>
                                
               </tbody>
             </table>
-            
+                  <nav th:if="${categorias.totalPages > 0}" aria-label="Page navigation example" >
+		    		<ul class="pagination justify-content-center">
+				        <li class="page-item" th:classappend="${categorias.number == 0 ? 'disabled' : ''}">
+				       		<a th:href="@{/categorias/paginate(page=${categorias.number - 1})}" class="page-link">Anterior</a>
+				        </li>			                    
+				    	<li class="page-item" th:classappend="${i eq categorias.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, categorias.totalPages, 1)}">
+				            <a class="page-link" th:href="@{/categorias/paginate?page={id}(id=${i-1})}" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+				        </li>			                  			                    
+				        <li class="page-item" th:classappend="${categorias.number == (categorias.totalPages - 1) ? 'disabled' : ''}">
+				        	<a th:href="@{/categorias/paginate(page=${categorias.number + 1})}" class="page-link">Siguiente</a>
+				    	</li>
+		    	   </ul>
+			  </nav>   
+          <!--  <nav th:if="${categorias.TotalPages > 0}" aria-label="Page navigation example">
+            	<ul class="pagination">
+            		<li class="page-item"><a th:href="@{/categorias/paginate(page=${categorias.number -1})}" class="page-link" >Anterior</a></li>
+            		<li class="page-item"><a th:href="@{/categorias/paginate(page=${categorias.number +1})}" class="page-link" >Siguiente</a></li>
+            	</ul>            
+            </nav>  -->            
           </div>
         </div>
       </div> <!-- /container -->

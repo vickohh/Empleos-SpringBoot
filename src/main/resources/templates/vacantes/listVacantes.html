@@ -59,7 +59,29 @@
                                
               </tbody>
             </table>
-            
+             
+             <nav th:if="${vacantes.totalPages > 0}" aria-label="Page navigation example" >
+			    <ul class="pagination justify-content-center">
+			        <li class="page-item" th:classappend="${vacantes.number == 0 ? 'disabled' : ''}">
+			       		<a th:href="@{/vacantes/paginate(page=${vacantes.number - 1})}" class="page-link">Anterior</a>
+			        </li>			                    
+			    	<li class="page-item" th:classappend="${i eq vacantes.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, vacantes.totalPages, 1)}">
+			            <a class="page-link" th:href="@{/vacantes/paginate?page={id}(id=${i-1})}" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+			        </li>			                  			                    
+			        <li class="page-item" th:classappend="${vacantes.number == (vacantes.totalPages - 1) ? 'disabled' : ''}">
+			        	<a th:href="@{/vacantes/paginate(page=${vacantes.number + 1})}" class="page-link">Siguiente</a>
+			    	</li>
+			    </ul>
+			</nav>    
+             
+             
+             
+            <!--   <nav th:if="${vacantes.totalPages > 0}" aria-label="Page navigation example">
+            	<ul class="pagination">
+            		<li class="page-item"><a th:href="@{/vacantes/paginate(page=${vacantes.number -1})}" class="page-link" >Anterior</a></li>
+            		<li class="page-item"><a th:href="@{/vacantes/paginate(page=${vacantes.number +1})}" class="page-link" >Siguiente</a></li>
+            	</ul>            
+             </nav> -->
           </div>
         </div>
       </div> <!-- /container -->

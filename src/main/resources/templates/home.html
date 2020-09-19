@@ -49,7 +49,7 @@
             <h2 th:text="${vacante.nombre}" >Arquitecto</h2>
             <h6 class="card-title"><strong>Categoría: </strong> <span th:text="${vacante.categoria.nombre}" >Sistemas</span></h6>
             <h6 class="card-title" ><strong>Publicado: </strong> <span th:text="${vacante.fecha}" >2019-01-01 </span></h6>                
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <p th:text="${vacante.descripcion}">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
             <p><a class="btn btn-secondary" th:href="@{/vacantes/view/{id} (id=${vacante.id})}" role="button">Detalles &raquo;</a></p>            
           </div>
         </div>        
