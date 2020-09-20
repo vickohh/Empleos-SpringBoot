@@ -45,7 +45,7 @@
                   <td th:text="${vacantes.categoria.nombre}">Supervisor de Ventas</td>  
                   
                   <td th:text="${vacantes.nombre}">Supervisor de Ventas</td>                  
-                  <td th:text="${vacantes.fecha}">11-01-2019</td>
+                  <td th:text="${#dates.format(vacantes.fecha, 'dd-MM-yyyy')}">11-01-2019</td>
                   <td th:text="${vacantes.estatus}">Creada</td>
                   <td >
                   <span th:if="${vacantes.destacado ==1}" class="badge badge-success">Si</span>
