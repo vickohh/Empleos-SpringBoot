@@ -24,6 +24,7 @@ public interface IUsuariosService {
 	
 	Usuario findByEmail(Usuario usuario);
 	Usuario findByUsername(Usuario usuario);
+	Usuario findByUsername(String usuario);
 }
 
 // Agregar al archivo menu.html el link para acceder al listado de Usuarios y configurar el link del botón Registrarse

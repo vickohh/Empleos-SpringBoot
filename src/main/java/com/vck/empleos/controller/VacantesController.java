@@ -136,17 +136,7 @@ public class VacantesController {
 	
 	@ModelAttribute/// agregar atributos globales para todos los metodos
 	public void setGenericos(Model model,Authentication auth) {
-		model.addAttribute("categorias", serviceCategorias.buscarTodas());
-		
-		String username =null;
-		try {
-			username = auth.getName();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("el usuario logeado es: " + username);
-		model.addAttribute("username", username);
+		model.addAttribute("categorias", serviceCategorias.buscarTodas());		
 	}
 	
 }

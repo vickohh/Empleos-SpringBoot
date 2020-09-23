@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @Table(name="usuarios")
 public class Usuario {
 	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //auto increment MYSQL
 	private Integer id;
@@ -92,6 +93,11 @@ public class Usuario {
 		this.fechaRegistro = fechaRegistro;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", username=" + username + ", nombre=" + nombre + ", email=" + email
+				+ ", password=" + password + ", estatus=" + estatus + ", fechaRegistro=" + fechaRegistro + ", perfiles="
+				+ perfiles + "]";
+	}	
 
 }

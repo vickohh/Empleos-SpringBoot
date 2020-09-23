@@ -46,4 +46,11 @@ public class UsuarioService implements IUsuariosService {
 		}
 		return null;		
 	}
+	public Usuario findByUsername(String usuario) {
+		Optional<Usuario> optional = usuarioRepo.findByUsername(usuario);
+		if(optional.isPresent()) {
+			return (optional.get());
+		}
+		return null;		
+	}
 }
