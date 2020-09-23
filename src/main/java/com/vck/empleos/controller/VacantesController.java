@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -134,8 +135,18 @@ public class VacantesController {
 	
 	
 	@ModelAttribute/// agregar atributos globales para todos los metodos
-	public void setGenericos(Model model) {
+	public void setGenericos(Model model,Authentication auth) {
 		model.addAttribute("categorias", serviceCategorias.buscarTodas());
 		
-	}	
+		String username =null;
+		try {
+			username = auth.getName();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("el usuario logeado es: " + username);
+		model.addAttribute("username", username);
+	}
+	
 }

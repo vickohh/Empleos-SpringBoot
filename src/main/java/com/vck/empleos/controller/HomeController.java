@@ -98,11 +98,21 @@ public class HomeController {
 	}
 	
 	@ModelAttribute/// agregar atributos globales para todos los metodos
-	public void setGenericos(Model model) {
+	public void setGenericos(Model model,RedirectAttributes attributes,Authentication auth) {
 		Vacante vacanteSearch = new Vacante();
 		vacanteSearch.reset();
 		model.addAttribute("search", vacanteSearch);	
-		model.addAttribute("vacantes", serviceVacantes.buscarDestacadas());			
+		model.addAttribute("vacantes", serviceVacantes.buscarDestacadas());
+		
+		String username =null;
+		try {
+			username = auth.getName();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("el usuario logeado es: " + username);
+		model.addAttribute("username", username);
 	}
 }
 

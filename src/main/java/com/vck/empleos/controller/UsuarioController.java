@@ -3,9 +3,11 @@ package com.vck.empleos.controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,5 +66,20 @@ public class UsuarioController {
 		serviceUsuario.eliminar(idUsuario);
 		attributes.addFlashAttribute("msg", "Registro Eliminado");
 		return  "redirect:/usuario/listUsuarios";	
+	}
+	
+	
+	@ModelAttribute/// agregar atributos globales para todos los metodos
+	public void setGenericos(Model model,Authentication auth) {
+			
+		String username =null;
+		try {
+			username = auth.getName();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("el usuario logeado es: " + username);
+		model.addAttribute("username", username);
 	}
 }
