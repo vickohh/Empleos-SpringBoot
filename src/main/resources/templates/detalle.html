@@ -43,7 +43,8 @@
                     <p class="card-text" th:utext="${vacantes.detalles}" ></p>
                   </div>
                 </div>   
-                <a class="btn btn-primary" href="#" role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Aplicar</a>                            
+                <a class="btn btn-primary" th:if="${session.user != null}" href="#" role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Aplicar</a>                            
+              	<p class="card-text" th:if="${session.user == null}">Registrate o accede a tu cuenta para aplicar</p>
               </div>
             </div>  
           </div>

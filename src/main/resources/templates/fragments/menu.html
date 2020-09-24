@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="/">Inicio</a>
+          <a class="nav-link active" href="/">Ofertas de trabajo</a>
         </li>
         <li class="nav-item"  sec:authorize="hasAnyAuthority('ADMINISTRADOR','SUPERVISOR')">
           <a class="nav-link" th:href="@{/vacantes/paginate}">Vacantes</a>
