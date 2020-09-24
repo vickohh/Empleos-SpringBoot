@@ -3,11 +3,14 @@ package com.vck.empleos.security;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -43,11 +46,12 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				"/tinymce/**",
 				"/js/**",
 				"/css/**").permitAll()
-		//VISTAS PUBLICAS NO REQUIRES AUTENTICACION
+		//VISTAS PUBLICAS NO REQUIEREN AUTENTICACION
 		.antMatchers(
 				"/",
 				"/usuario/signup",
 				"/search",
+				"/bcrypt/**",
 				"/vacantes/view/**").permitAll()
 		
 		.antMatchers("/vacantes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
@@ -59,7 +63,14 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 		//REQUIERE AUTENTICACION TODAS LAS DEMAS URLS
 		.anyRequest().authenticated()
 		//FORMULARIO LOGIN NO REQUIERE AUTENTICACION		
-		.and().formLogin().permitAll();						
+		.and().formLogin()
+		//formulario de login configurado aqui
+		.loginPage("/login").permitAll();						
+	}
+	
+	@Bean																//Metodo para crear encriptacion de password con Spring boot Secutiry
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 	
 

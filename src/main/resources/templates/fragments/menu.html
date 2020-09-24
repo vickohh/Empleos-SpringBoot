@@ -21,7 +21,8 @@
       </ul>
      
      
-	  <a href="#" class="badge badge-secondary" th:if="${session.user != null}" th:text="${session.user.nombre}">Secondary</a>&nbsp;&nbsp;
+	  <a href="#" class="badge badge-secondary" th:if="${session.user != null}" th:text="${session.user.nombre}">Secondary</a>&nbsp;
+	  <a href="#" class="badge badge-secondary" th:if="${session.userRol != null}" th:text="${session.userRol}">Secondary</a>&nbsp;
 	  <div sec:authorize="isAnonymous()">
 	      <a class="btn btn-primary" th:if="${session.user == null}" th:href="@{/index}">Ingresar</a>&nbsp;
 	      <a class="btn btn-primary" th:if="${session.user == null}" th:href="@{/usuario/signup}">Registrarse</a>&nbsp;

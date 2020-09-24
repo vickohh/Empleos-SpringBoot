@@ -3,6 +3,7 @@ package com.vck.empleos.controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,9 @@ public class UsuarioController {
 	@Autowired
 	private IUsuariosService serviceUsuario;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@GetMapping("/listUsuarios")														  //LISTADO DE USUARIOS
 	public String mostrarIndex(Model model) {
 		model.addAttribute("usuarios", serviceUsuario.buscarTodos());
@@ -33,16 +37,20 @@ public class UsuarioController {
 		return "usuario/formUsuario";		
 	}
 	
-	@PostMapping("/signup")
+	@PostMapping("/signup")																 //GUARDAR USUARIO
 	public String guardarResgistro(Usuario usuario,Model model,RedirectAttributes attributes) {		
 		usuario.setEstatus(1);
 		usuario.setFechaRegistro(new Date());
+		
+		String pwdPlano = usuario.getPassword();
+		String pwdEncripted = passwordEncoder.encode(pwdPlano);
+		usuario.setPassword(pwdEncripted);
 
 	if(serviceUsuario.findByEmail(usuario) == null  && serviceUsuario.findByUsername(usuario) == null) {
 		System.out.println("USUARIO NUEVO AGREGADO");
 		serviceUsuario.guardar(usuario);
 		attributes.addFlashAttribute("msg","Usuario agregado");
-		//System.out.println("USUARIO NUEVO AGREGADO");
+																					//System.out.println("USUARIO NUEVO AGREGADO");
 		return "redirect:/usuario/listUsuarios";
 	  }else {
 		  if(serviceUsuario.findByEmail(usuario) != null) 
@@ -59,7 +67,7 @@ public class UsuarioController {
 	 return "redirect:/usuario/signup";	      	 	
 	}
 	
-	@GetMapping("/delete/{id}")														  //ELIMINAR VACANTE
+	@GetMapping("/delete/{id}")														   //ELIMINAR VACANTE
 	public String eliminar(@PathVariable("id") int idUsuario,Model model,RedirectAttributes attributes) {
 		serviceUsuario.eliminar(idUsuario);
 		attributes.addFlashAttribute("msg", "Registro Eliminado");

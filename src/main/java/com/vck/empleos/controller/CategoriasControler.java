@@ -27,7 +27,7 @@ public class CategoriasControler {
 	@Qualifier("categoriasServiceJPA")
 	private ICategoriasService serviceCategorias;
 	
-	// @GetMapping("/index")                                                        //INDEX
+	// @GetMapping("/index")   es lo mismo                                                   //INDEX
 	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public String mostrarIndex(Model model) {
 		
