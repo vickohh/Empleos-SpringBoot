@@ -70,7 +70,7 @@ public class VacantesController {
 	    Vacante vacante = serviceVacantes.buscaPorId(idVacante);
 		model.addAttribute("vacantes", vacante);	
 		//buscara los detalles de la vacante en la BD
-		return "detalle";
+		return "/detalle";
 	}
 	
 	public void setGenericos() {
@@ -109,6 +109,7 @@ public class VacantesController {
 		serviceVacantes.guardar(vacante);                                            //GUARDAR
 		System.out.println(vacante.toString());
 		attributes.addFlashAttribute("msg", "Registro Guardado");
+		attributes.addFlashAttribute("errors", result);
 		return "redirect:/vacantes/listvac";		
 	}
 	

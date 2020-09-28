@@ -1,6 +1,5 @@
 package com.vck.empleos.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,20 +66,7 @@ public class HomeController {
 		model.addAttribute("tabla", lista);
 		return "tabla";
 	}
-			
-	
-	@GetMapping("/detalle")
-	public String showDetails(Model model) {
-		Vacante vacante = new Vacante();
-		vacante.setNombre("Ingeniero de Comunicaciones");
-		vacante.setDescripcion("Se solicita ingeniero para soporte de Intranet");
-		vacante.setFecha(new Date());
-		vacante.setSalario(10900);
-		
-		model.addAttribute("vacante", vacante);		
-		return"home";		
-	}
-	
+				
 	
 	@GetMapping("/")
 	public String showHome(Model model ) {

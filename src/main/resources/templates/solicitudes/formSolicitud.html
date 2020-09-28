@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://spring.io/images/spring-initializr-4291cc0115eb104348717b82161a81de.svg">
+
+    <title>EmpleosApp | Creación de Ofertas de Trabajo</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link  th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link  th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
+  </head>
+
+  <body>
+
+    <header th:insert="fragments/menu:: menu-principal">
+ 	</header>
+
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+        <div class="row">
+          <div class="col-md-3">            
+            <img class="rounded mx-auto d-block"  th:src="@{/logos/{img} (img=${vacantes.imagen})}" alt="Generic placeholder image" width="220" height="220">            
+          </div>
+          <div class="col-md-9">
+            <div class="card">
+              <h4 class="card-header"><strong><span th:text="${vacantes.nombre}"></span> Aplicar para la vacante Ingeniero Civil</strong></h4>              
+              <div class="card-body" >
+                <h5 class="card-title"  th:text="${vacantes.categoria.nombre}"><strong>Categoría: </strong><span>Nombre la categoría</span></h5>
+                <h6 class="card-title"  th:text="${#dates.format(vacantes.fecha, 'dd-MM-yyyy')}" ><strong>Publicado: </strong><span>2019-01-01</span></h6>
+                <h6 class="card-title"  th:text="${vacantes.salario}"><strong>Salario Ofrecido: </strong><span>$9000</span></h6>
+                <p class="card-text"th:text="${vacantes.descripcion}">La descripción corta de la oferta de trabajo</p>
+                <hr>
+                <form  th:action="@{/solicitudes/save}" th:object="${solicitud}" method="post" enctype="multipart/form-data">
+                <div th:if="${errores != null}" class="alert alert-danger" role="alert">
+	              	Por favor corrija los siguientes erroes en el formulario:
+					<ul>
+						<li  th:text="${errores}"  >
+					</ul>            
+              	 </div>                                                                   
+                  <div class="row">
+                    <div class="col-md-6"> 
+                      <div class="form-group">
+                        <input type="hidden" th:name="vacante.id" th:value="${vacantes.id}">
+                        <label for="comentarios">Comentarios</label>   
+                        <textarea class="form-control" name="comentarios"  id="comentarios" rows="2"  th:field="*{comentarios}" ></textarea>
+                      </div> 
+                    </div> 
+                    <div class="col-md-6"> 
+                      <div class="form-group">
+                        <label for="archivocv">Curriculm Vitae</label>
+                        <input type="file" class="form-control-file" name="archivocv" id="archivocv" required="true">
+                        <p class="help-block">Archivos [ pdf,doc,docx ]</p>
+                      </div>
+                    </div>
+                  </div> 
+                  <hr>
+                  <button type="submit" title="Enviar mi Solicitud." class="btn btn-primary">Enviar</button>  
+                </form>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+     <footer th:insert="fragments/footer1 :: footer1" class="footer">
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>    
+    <script th:src="@{/tinymce/tinymce.min.js}"></script>
+    <script>
+      
+      $(function () {
+          $("#fecha").datepicker({dateFormat: 'dd-mm-yy'});
+        }
+      );
+      
+      
+      tinymce.init({
+          selector: '#detalles',
+          plugins: "textcolor, table lists code",
+          toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify \n\
+                    | bullist numlist outdent indent | forecolor backcolor table code"
+      });
+      
+      
+      
+    </script>
+  </body>
+</html>
