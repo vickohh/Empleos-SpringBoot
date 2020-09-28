@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.vck.empleos.model.Solicitud;
+import com.vck.empleos.model.Usuario;
+import com.vck.empleos.model.Vacante;
 
 public interface ISolicitudesService {
 	
@@ -23,4 +25,6 @@ public interface ISolicitudesService {
 	
 	// EJERCICIO: Método que recupera todas las Solicitudes (con paginación) guardadas en la BD (solo disponible para usuarios con perfil ADMINISTRADOR/SUPERVISOR).
 	Page<Solicitud> buscarTodas(Pageable page);
+	
+	public boolean buscarVacanteAplicada(Vacante vacante, Usuario usuario);
 }

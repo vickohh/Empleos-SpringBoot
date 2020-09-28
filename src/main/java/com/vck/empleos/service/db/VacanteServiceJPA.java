@@ -58,5 +58,6 @@ public class VacanteServiceJPA implements IVacantesService {
 		
 		return vacantesRepo.findAll(page);
 	}
+	
 
 }

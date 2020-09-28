@@ -43,8 +43,10 @@
                     <p class="card-text" th:utext="${vacantes.detalles}" ></p>
                   </div>
                 </div>   
-                <a class="btn btn-primary" sec:authorize="isAuthenticated()"   th:if="${session.userRol == 'USUARIO'}"th:href="@{/solicitudes/create/{id} (id=${vacantes.id})}"  role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Aplicar</a>                            
+                <a class="btn btn-primary" sec:authorize="isAuthenticated()"   th:if="${session.userRol == 'USUARIO' && vacanteAplicada == false}"th:href="@{/solicitudes/create/{id} (id=${vacantes.id})}"  role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Aplicar</a>                            
               	<p class="card-text" sec:authorize="isAnonymous()" >Registrate o accede a tu cuenta para aplicar</p>
+              	<p class="card-text"  th:if="${vacanteAplicada == true}" >VACANTE APLICADA</p>
+                <a class="nav-link" th:href="@{/solicitudes/index}">Ver mis Vacantes</a>
               </div>
             </div>  
           </div>

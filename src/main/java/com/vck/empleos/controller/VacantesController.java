@@ -27,8 +27,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vck.empleos.model.Categoria;
+import com.vck.empleos.model.Usuario;
 import com.vck.empleos.model.Vacante;
 import com.vck.empleos.service.ICategoriasService;
+import com.vck.empleos.service.ISolicitudesService;
+import com.vck.empleos.service.IUsuariosService;
 import com.vck.empleos.service.IVacantesService;
 import com.vck.empleos.util.Utileria;
 
@@ -46,6 +49,12 @@ public class VacantesController {
 	@Autowired
 	@Qualifier("categoriasServiceJPA")
 	ICategoriasService serviceCategorias;
+	
+	@Autowired
+	IUsuariosService serviceUsuarios;
+	
+	@Autowired
+	ISolicitudesService serviceSolicitudes;
 	
 	
 	
@@ -66,10 +75,17 @@ public class VacantesController {
 	
 	
 	@GetMapping("/view/{id}")														//BUSCAR POR ID
-	public String verDetalles(@PathVariable("id") int idVacante,Model model) {	
+	public String verDetalles(@PathVariable("id") int idVacante,Model model,Authentication auth) {	
 	    Vacante vacante = serviceVacantes.buscaPorId(idVacante);
 		model.addAttribute("vacantes", vacante);	
-		//buscara los detalles de la vacante en la BD
+		
+		String username = auth.getName();
+		Usuario user = serviceUsuarios.findByUsername(username);
+		
+		boolean vacanteAplicada = serviceSolicitudes.buscarVacanteAplicada(vacante, user);
+		
+		System.out.println("La vacante ya fue aplicada?  "+ vacanteAplicada);
+		model.addAttribute("vacanteAplicada", vacanteAplicada);	
 		return "/detalle";
 	}
 	

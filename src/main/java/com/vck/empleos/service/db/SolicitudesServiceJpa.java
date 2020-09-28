@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.vck.empleos.model.Solicitud;
+import com.vck.empleos.model.Usuario;
+import com.vck.empleos.model.Vacante;
 import com.vck.empleos.repository.SolicitudesRepository;
 import com.vck.empleos.service.ISolicitudesService;
 
@@ -47,6 +49,16 @@ public class SolicitudesServiceJpa implements ISolicitudesService {
 	public Page<Solicitud> buscarTodas(Pageable page) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean buscarVacanteAplicada(Vacante vacante, Usuario usuario) {
+		Solicitud solicitud = solicitudesRepo.findByVacanteAndUsuario(vacante, usuario);
+		if( solicitud != null) {
+		return true; //vancate ya esta aplicada
+		}
+		
+		return false; // vacante no esta aplicada
 	}	
 
 }

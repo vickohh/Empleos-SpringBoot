@@ -53,7 +53,7 @@ public class SolicitudesController {
 	private String rutaArvhivo;
 		
     /**
-	 * Metodo que muestra la lista de solicitudes sin paginacion
+	 * Metodo que muestra la lista de solicitudes sin paginacion---------------------------------------------------------------------------------PENDIENTE
 	 * Seguridad: Solo disponible para un usuarios con perfil ADMINISTRADOR/SUPERVISOR.
 	 * @return
 	 */
@@ -93,7 +93,7 @@ public class SolicitudesController {
 	}
 	
 	/**
-	 * Método que guarda la solicitud enviada por el usuario en la base de datos-----------------------------------------------------------------EN PROGRESO
+	 * Método que guarda la solicitud enviada por el usuario en la base de datos-----------------------------------------------------------------DONE
 	 * Seguridad: Solo disponible para un usuario con perfil USUARIO.
 	 * @return
 	 */
@@ -102,7 +102,7 @@ public class SolicitudesController {
 						@RequestParam("archivocv") MultipartFile multiPart, Model model) {	
 		
 		/**
-		 * 
+		 * pendiente, que la solicitud ya no este disponible para aplicar, si ya fue aplicada con anterioridad
 		 */
 		String username = auth.getName();
 		Usuario user = serviceUsuarios.findByUsername(username);
